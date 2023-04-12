@@ -3,7 +3,12 @@
     <p>
         <%= startingContent %>
     </p>
-    <% for(let i=0; i<newPosts.length; i++){ %>
-        <% console.log(newPosts[i].title); %>
-            <% } %>
-                <%- include('partials/footer'); -%>
+    <% newPosts.forEach((element)=> {%>
+        <h1>
+            <%=element.title%>
+        </h1>
+        <p>
+            <%=element.post%>
+        </p>
+        <% }); %>
+            <%- include('partials/footer'); -%>
