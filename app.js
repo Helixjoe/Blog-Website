@@ -18,6 +18,9 @@ app.get("/", (req, res) => {
   res.render("home", { startingContent: homeStartingContent, newPosts: posts });
 })
 
+app.get("/posts/:postName", (req, res) => {
+  console.log(req.params.postName);
+})
 app.get("/about", (req, res) => {
   res.render("about", { aboutContent: aboutContent });
 })
