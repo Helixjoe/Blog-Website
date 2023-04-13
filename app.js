@@ -21,10 +21,11 @@ app.get("/", (req, res) => {
 
 app.get("/posts/:postName", (req, res) => {
   const requiredTitle = req.params.postName;
-  posts.forEach((element) => {
-    const storedTitle = element.title;
+  posts.forEach((post) => {
+    const storedTitle = post.title;
     if (lodash.lowerCase(requiredTitle) === lodash.lowerCase(storedTitle)) {
       console.log("Match Found");
+      res.render("post", { postTitle: post.title, postContent: post.post });
     }
   });
 
