@@ -1,7 +1,9 @@
 <%- include('partials/header'); -%>
-    <h1>Home</h1>
+    <h1>
+        <%= startingContent[0] %>
+    </h1>
     <p>
-        <%= startingContent %>
+        <%= startingContent[1]%>
     </p>
     <% newPosts.forEach((element)=> {%>
         <h1>
