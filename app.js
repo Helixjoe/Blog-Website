@@ -43,34 +43,26 @@ function insertRecord(postContent) {
 
 
 // Api Routes
-
+const foundPostArr = [];
 app.get("/", (req, res) => {
-  const foundPostarr = [];
   async function run() {
     const foundPosts = await Post.find();
-    if (foundPosts != null) {
-      foundPostarr.push(foundPosts);
-      insertRecord(foundPosts);
-    }
-    else {
-      insertRecord(startingPost);
-      foundPostarr.push(startingPosts);
-    }
+    foundPostArr.push(foundPosts);
+    insertRecord(foundPosts);
+    console.log(foundPosts);
     res.render("home", {
       startingContent: homeStartingContent,
       newPosts: foundPosts
     });
   };
   run();
-
-
 })
 
-app.get("/posts/:postName", (req, res) => {
-  const requiredTitle = req.params.postName;
-  posts.forEach((post) => {
-    const storedTitle = post.title;
-    if (lodash.lowerCase(requiredTitle) === lodash.lowerCase(storedTitle)) {
+app.get("/posts/:postId", (req, res) => {
+  const requiredId = req.params.postId;
+  foundPostArr[0].forEach((post) => {
+    const storedId = post._id;
+    if (requiredId == storedId) {
       console.log("Match Found");
       res.render("post", { postTitle: post.title, postContent: post.post });
     }
@@ -95,6 +87,7 @@ app.post("/compose", (req, res) => {
     post: req.body.contentPost
   });
   insertRecord(postContent);
+  Post.save();
   res.redirect("/");
 })
 
